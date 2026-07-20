@@ -2,11 +2,9 @@
 
 $data = require 'data.php';
 
-$count = 0;
+$modifiedArray = array_map(function (array $data) {
+    $data['country'] = strtoupper($data['country']);
+    return $data;
+}, $data);
 
-// Passamos o $count como referência, pois iremos alterar o seu valor
-array_walk($data, function () use(&$count){
-    $count++;
-});
-
-echo "The number of countries participating is: $count\n";
+var_dump($modifiedArray);

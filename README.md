@@ -2,6 +2,7 @@
 
 Este projeto visa explicar os conceitos de programação funcional utilizando o PHP. Ele é apenas um RESUMO do meu entendimento do assunto através dos cursos da Alura ministrados pelo grande [Vinicius Dias](https://www.youtube.com/@DiasDeDev). Para um entendimento completo a respeito do assunto recomendo checar o curso completo através do site da Alura.
 
+## Revisitando Funções
 
 ### Tipo Callable
 
@@ -101,38 +102,39 @@ Vamos considerar que temos um arquivo com alguns países e as suas medalhas numa
 
 return [
     [
-        "pais" => "Brasil",
-        "medalhas" => [
-            "ouro" => 3,
-            "prata" => 5,
+    "country" => "Brazil",
+        "medals" => [
+            "gold" => 3,
+            "silver" => 5,
             "bronze" => 10
         ]
     ],
     [
-    "pais" => "Costa Rica",
-        "medalhas" => [
-            "ouro" => 10,
-            "prata" => 8,
+    "country" => "Costa Rica",
+        "medals" => [
+            "gold" => 10,
+            "silver" => 8,
             "bronze" => 13
         ]
     ],
     [
-    "pais" => "Inglaterra",
-        "medalhas" => [
-            "ouro" => 15,
-            "prata" => 10,
+    "country" => "England",
+        "medals" => [
+            "gold" => 15,
+            "silver" => 10,
             "bronze" => 20
         ]
     ],
     [
-    "pais" => "Espanha",
-        "medalhas" => [
-            "ouro" => 10,
-            "prata" => 3,
+    "country" => "Saudi Arabia",
+        "medals" => [
+            "gold" => 10,
+            "silver" => 3,
             "bronze" => 2
         ]
-    ],
+    ]    
 ];
+
 ```
 
 Em PHP isto é muito fácil. Basta iniciarmos um contador em 0, fazer um foreach no array e dentro dele incrementar o contador.
@@ -172,4 +174,51 @@ echo "The number of countries participating is: $count\n";
 
 Nele utilizamos uma função nativa do PHP que percorre um array chamada `array_walk()` e dentro da função anônima que criamos dentro do `array_walk()` fizemos a contagem dos países.
 
-É claro que os dois códigos acima podem ser facilmente substituidos por um simples `count($data);`, mas a ideia aqui é mostrar que podemos abordar o mesmo problema de maneiras diferentes, desde que saibamos quais ferramentas utilizar ao nosso favor.
+É claro que os dois códigos acima podem ser facilmente substituídos por um simples `count($data);`, mas a ideia aqui é mostrar que podemos abordar o mesmo problema de maneiras diferentes, desde que saibamos quais ferramentas utilizar ao nosso favor.
+
+## Manipulando Arrays
+
+### Mapeando Dados
+
+Vamos utilizar o array de países criado anteriormente e modificar o valor da chave country, deixando o nome de cada país em letras maiúsculas. Temos algumas opções:
+
+- Usar um foreach, mas neste caso teríamos que utilizar referências para alterar os elementos do array original.
+- Usar um for, para iterar sob cada chave do array.
+- Utilizar uma abordagem mais declarativa, mapeando os elementos do array e informando apenas qual transformação desejamos aplicar.
+
+Aqui, por se tratar de um conteúdo baseado no paradigma funcional, vamos utilizar a abordagem número três, utilizando a função `array_map()` do PHP.
+
+```php
+<?php
+
+$data = require 'data.php';
+
+$modifiedArray = array_map(function (array $data) {
+    $data['country'] = strtoupper($data['country']);
+    return $data;
+}, $data);
+
+var_dump($modifiedArray);
+```
+
+O `array_map()` percorre todos os elementos do array recebido como parâmetro. Para cada elemento, ele executa a função informada e utiliza o valor retornado por essa função para montar um novo array. Neste exemplo, cada elemento do array é recebido pela função anônima na variável `$data`. Alteramos o valor da chave country utilizando `strtoupper()` e retornamos o elemento modificado. Ao final da execução, o `array_map()` devolve um novo array contendo todas essas alterações. 
+
+Neste exemplo armazenamos o resultado em uma nova variável `$modifiedArray`. Embora seja possível sobrescrever o array original, criar um novo array é uma prática comum na programação funcional, pois evita modificar os dados originais.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
