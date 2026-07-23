@@ -206,7 +206,7 @@ O `array_map()` percorre todos os elementos do array recebido como parâmetro. P
 Neste exemplo armazenamos o resultado em uma nova variável `$modifiedArray`. Embora seja possível sobrescrever o array original, criar um novo array é uma prática comum na programação funcional, pois evita modificar os dados originais.
 
 
-## Filtrando o array
+### Filtrando o array
 
 Agora vamos abordar um problema um pouco mais complexo que os anteriores. Vamos dizer que queremos filtrar o nosso array de países e exibir somente países que possuam um espaço em seu nome. Utilizando a abordagem funcional, podemos fazer uma função que verifica se a string possue um espaço e usar o `array_filter()` para salvar esses dados.
 
