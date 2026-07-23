@@ -206,9 +206,25 @@ O `array_map()` percorre todos os elementos do array recebido como parâmetro. P
 Neste exemplo armazenamos o resultado em uma nova variável `$modifiedArray`. Embora seja possível sobrescrever o array original, criar um novo array é uma prática comum na programação funcional, pois evita modificar os dados originais.
 
 
+## Filtrando o array
 
+Agora vamos abordar um problema um pouco mais complexo que os anteriores. Vamos dizer que queremos filtrar o nosso array de países e exibir somente países que possuam um espaço em seu nome. Utilizando a abordagem funcional, podemos fazer uma função que verifica se a string possue um espaço e usar o `array_filter()` para salvar esses dados.
 
+```php
+<?php
 
+$data = require 'data.php';
+
+function checkIfCountryHasSpaceInTheName(array $country): bool {
+    return str_contains($country['country'], ' ');
+}
+
+$data = array_filter($data, 'checkIfCountryHasSpaceInTheName');
+
+var_dump($data);
+```
+
+Basicamente criamos uma função que checa se a string contém algum valor (no nosso caso um espaço em branco) e retornamos o resultado dessa validação. Quando chamamos o `array_filter()` informando o nosso array e a função que criamos, ele percorre o array e filtra ele usando a validação que criamos. Portanto, `$data` será agora um array contendo apenas os países que atendem a validação que criamos acima.
 
 
 

@@ -2,9 +2,10 @@
 
 $data = require 'data.php';
 
-$modifiedArray = array_map(function (array $data) {
-    $data['country'] = strtoupper($data['country']);
-    return $data;
-}, $data);
+function checkIfCountryHasSpaceInTheName(array $country): bool {
+    return str_contains($country['country'], ' ');
+}
 
-var_dump($modifiedArray);
+$data = array_filter($data, 'checkIfCountryHasSpaceInTheName');
+
+var_dump($data);
